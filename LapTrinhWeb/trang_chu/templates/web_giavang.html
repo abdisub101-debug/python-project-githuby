@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Tổng hợp thông tin giá vàng</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<div class="container-fluid">
+    <!--#2a3477-->
+    <div class="row bg-primary justify-content-center align-items-center" style="height: 80px">
+        <h1 style="color:White; font-family:calibri">Trang tổng hợp thông tin giá vàng trong nước</h1>
+    </div>
+    <div class="row" style="height: 40px">
+    </div>
+    <div class="col-8 offset-2">
+        <h2 class="font-weight-bold" style="text-align:center">Số liệu thống kê</h2>
+        <p>Nguồn số liệu: Báo Vietnamnet. Link: <a href="https://vietnamnet.vn/gia-vang-tag14642850852768478603.html"
+                                                   target="_blank">https://vietnamnet.vn/gia-vang-tag14642850852768478603.html</a>
+        </p>
+        <br>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Mua vào</th>
+                <th scope="col">Bán ra</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <th scope="row">SJC Hà Nội</th>
+                <td>{{gold_stats.SJC_HN_buy}}</td>
+                <td>{{gold_stats.SJC_HN_sell}}</td>
+            </tr>
+            <tr>
+                <th scope="row">SJC HCM</th>
+                <td>{{gold_stats.SJC_HCM_buy}}</td>
+                <td>{{gold_stats.SJC_HCM_sell}}</td>
+            </tr>
+            <tr>
+                <th scope="row">DOJI Hà Nội</th>
+                <td>{{gold_stats.DOJI_HN_buy}}</td>
+                <td>{{gold_stats.DOJI_HN_sell}}</td>
+            </tr>
+            <tr>
+                <th scope="row">DOJI HCM</th>
+                <td>{{gold_stats.DOJI_HCM_buy}}</td>
+                <td>{{gold_stats.DOJI_HCM_sell}}</td>
+            </tr>
+            <tr>
+                <th scope="row">Thế giới</th>
+                <td>{{gold_stats.TG_buy}}</td>
+                <td>{{gold_stats.TG_sell}}</td>
+            </tr>
+            </tbody>
+        </table>
+        <br>
+        <br>
+        <h2 class="font-weight-bold" style="text-align:center">Biểu đồ giá vàng qua các năm</h2>
+        <p>Nguồn số liệu: Báo The Bank. Link: <a href="https://thebank.vn/blog/21950-bieu-do-gia-vang-sjc.html" target="_blank">https://thebank.vn/blog/21950-bieu-do-gia-vang-sjc.html</a>
+        </p>
+        <br>
+        <div>
+            <canvas id="myChart"></canvas>
+        </div>
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script>
+        const ctx = document.getElementById('myChart');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022],
+                datasets: [{
+                    label: 'Mua vào',
+                    data: {{list_buy}},
+                    borderWidth: 2,
+                },{
+                    label: 'Bán ra',
+                    data: {{list_sell}},
+                    borderWidth: 2,
+                }],
+            },
+        });
+        </script>
+        <br>
+        <br>
+        <h2 class="font-weight-bold" style="text-align:center">Tin tức</h2>
+        <p>Nguồn tin tức: Báo VNExpress. Link: <a href="https://vnexpress.net/chu-de/gia-vang-1403" target="_blank">https://vnexpress.net/chu-de/gia-vang-1403</a>
+        </p>
+        <br>
+
+        {% for article in article_list %}
+        <div class="row bg-light">
+            <div class="col-4 ">
+                <img class="img-fluid" src="{{ article.img_src }}">
+            </div>
+            <div class="col-8 mt-2">
+                <div class="row font-weight-bold" style="font-size: 20px; line-height: 100%;">
+                    {{ article.title }}
+                </div>
+                <br>
+                <div class="row" style="font-size: 16px; ">
+                    {{ article.content }}
+                </div>
+            </div>
+        </div>
+        <br>
+        {% endfor %}
+
+    </div>
+</div>
+</body>
+</html>
