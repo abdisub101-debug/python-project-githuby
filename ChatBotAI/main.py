@@ -1,6 +1,6 @@
 import tkinter as tk
 from google import genai
-client = genai.Client(api_key="AQ.Ab8RN6Iv6ISBBzbcN-q2V3XxtFD95tcaI2_6N_cmtvxXeKZNZA")
+client = genai.Client(api_key="APIKEYISPRIAVE")
 def sent_text():
     user_
 
