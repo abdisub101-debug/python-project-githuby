@@ -1,8 +1,21 @@
+
 import tkinter as tk
+from urllib import response
+
+from cffi import model
 from google import genai
-client = genai.Client(api_key="APIKEYISPRIAVE")
+client = genai.Client(api_key="NotToday")
 def sent_text():
-    user_
+    user_text = text_box.get('1.0', tk.END)
+    text_area.insert(tk.END, 'You:' + user_text)
+    text_box.delete('1.0', tk.END)
+
+def computer_response(message):
+    response = client.models.generate_content(
+        model = "gemini-3.8-flash",
+        contents = message,
+    )
+    text_area.insert(tk.END, 'Computer:' + response.text)
 
 wd = tk.Tk()
 wd.title("ChatBot")
